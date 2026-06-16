@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SkillBridge Agency — Connecting Talent to Opportunity</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink:      #0D0D0D;
+    --cream:    #F7F3EE;
+    --gold:     #C9A84C;
+    --gold-lt:  #F0DFA5;
+    --warm:     #E8E0D4;
+    --muted:    #7A7268;
+    --white:    #FFFFFF;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.2rem 4%;
+    background: rgba(247,243,238,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--warm);
+  }
+  .logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800; font-size: 1.25rem; letter-spacing: -0.02em;
+  }
+  .logo span { color: var(--gold); }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a { text-decoration: none; color: var(--ink); font-size: 0.9rem; font-weight: 500; transition: color .2s; }
+  .nav-links a:hover { color: var(--gold); }
+  .nav-cta {
+    background: var(--ink); color: var(--white);
+    border: none; padding: .6rem 1.4rem; border-radius: 2px;
+    font-family: 'Inter', sans-serif; font-size: .875rem; font-weight: 500;
+    cursor: pointer; transition: background .2s;
+    text-decoration: none;
+  }
+  .nav-cta:hover { background: var(--gold); color: var(--ink); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 8rem 4% 4rem;
+    position: relative; overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 80% 60% at 70% 50%, var(--gold-lt) 0%, transparent 70%);
+    opacity: .45; pointer-events: none;
+  }
+  .hero-eyebrow {
+    font-size: .8rem; letter-spacing: .2em; text-transform: uppercase;
+    color: var(--gold); font-weight: 500; margin-bottom: 1.4rem;
+  }
+  .hero h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(2.8rem, 7vw, 6rem);
+    font-weight: 800; line-height: 1.02; letter-spacing: -0.03em;
+    max-width: 14ch; margin-bottom: 1.6rem;
+  }
+  .hero h1 em { font-style: normal; color: var(--gold); }
+  .hero-sub {
+    font-size: clamp(1rem, 1.8vw, 1.2rem);
+    color: var(--muted); max-width: 44ch; line-height: 1.65;
+    margin-bottom: 2.5rem; font-weight: 300;
+  }
+  .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--ink); color: var(--white);
+    padding: .85rem 2rem; border-radius: 2px;
+    font-family: 'Inter', sans-serif; font-size: .95rem; font-weight: 500;
+    text-decoration: none; transition: background .2s, transform .15s;
+    display: inline-block;
+  }
+  .btn-primary:hover { background: var(--gold); color: var(--ink); transform: translateY(-2px); }
+  .btn-ghost {
+    border: 1.5px solid var(--ink); color: var(--ink);
+    padding: .85rem 2rem; border-radius: 2px;
+    font-family: 'Inter', sans-serif; font-size: .95rem; font-weight: 500;
+    text-decoration: none; transition: all .2s; display: inline-block;
+  }
+  .btn-ghost:hover { background: var(--ink); color: var(--white); }
+  .hero-stats {
+    display: flex; gap: 3rem; margin-top: 4rem;
+    padding-top: 2.5rem; border-top: 1px solid var(--warm);
+    flex-wrap: wrap;
+  }
+  .stat-num {
+    font-family: 'Syne', sans-serif; font-size: 2rem; font-weight: 800; color: var(--gold);
+  }
+  .stat-label { font-size: .8rem; color: var(--muted); margin-top: .2rem; letter-spacing: .05em; text-transform: uppercase; }
+
+  /* ── SECTION SHARED ── */
+  section { padding: 6rem 4%; }
+  .section-label {
+    font-size: .75rem; letter-spacing: .2em; text-transform: uppercase;
+    color: var(--gold); font-weight: 500; margin-bottom: .8rem;
+  }
+  .section-title {
+    font-family: 'Syne', sans-serif; font-size: clamp(1.8rem, 4vw, 3rem);
+    font-weight: 800; letter-spacing: -0.02em; line-height: 1.1; margin-bottom: 1rem;
+  }
+  .section-sub { color: var(--muted); max-width: 48ch; line-height: 1.7; font-weight: 300; }
+
+  /* ── HOW IT WORKS ── */
+  .how { background: var(--ink); color: var(--white); }
+  .how .section-title { color: var(--white); }
+  .how .section-sub { color: #999; }
+  .how .section-label { color: var(--gold); }
+  .steps {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 2rem; margin-top: 3.5rem;
+  }
+  .step {
+    padding: 2rem; border: 1px solid #2a2a2a; border-radius: 4px;
+    transition: border-color .25s, transform .2s;
+  }
+  .step:hover { border-color: var(--gold); transform: translateY(-4px); }
+  .step-num {
+    font-family: 'Syne', sans-serif; font-size: 3rem; font-weight: 800;
+    color: var(--gold); opacity: .35; line-height: 1; margin-bottom: 1rem;
+  }
+  .step h3 { font-family: 'Syne', sans-serif; font-size: 1.1rem; font-weight: 700; margin-bottom: .6rem; }
+  .step p { font-size: .9rem; color: #999; line-height: 1.6; }
+
+  /* ── WORKERS GRID ── */
+  .workers-header {
+    display: flex; align-items: flex-end; justify-content: space-between;
+    flex-wrap: wrap; gap: 1.5rem; margin-bottom: 3rem;
+  }
+  .filter-row { display: flex; gap: .6rem; flex-wrap: wrap; }
+  .filter-btn {
+    padding: .4rem 1rem; border-radius: 20px; border: 1.5px solid var(--warm);
+    background: transparent; font-size: .8rem; font-family: 'Inter', sans-serif;
+    cursor: pointer; transition: all .2s; color: var(--ink);
+  }
+  .filter-btn.active, .filter-btn:hover { background: var(--ink); color: var(--white); border-color: var(--ink); }
+  .workers-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1.5rem;
+  }
+  .worker-card {
+    background: var(--white); border-radius: 4px; overflow: hidden;
+    transition: transform .2s, box-shadow .2s;
+    border: 1px solid var(--warm);
+  }
+  .worker-card:hover { transform: translateY(-6px); box-shadow: 0 20px 40px rgba(0,0,0,.1); }
+  .worker-img {
+    width: 100%; height: 200px; object-fit: cover;
+    background: linear-gradient(135deg, var(--warm), var(--gold-lt));
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Syne', sans-serif; font-size: 3rem; font-weight: 800; color: var(--gold);
+  }
+  .worker-body { padding: 1.4rem; }
+  .worker-name { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1.05rem; margin-bottom: .25rem; }
+  .worker-role { font-size: .8rem; color: var(--gold); font-weight: 500; text-transform: uppercase; letter-spacing: .08em; margin-bottom: .6rem; }
+  .worker-location { font-size: .8rem; color: var(--muted); margin-bottom: 1rem; display: flex; align-items: center; gap: .3rem; }
+  .worker-tags { display: flex; flex-wrap: wrap; gap: .4rem; margin-bottom: 1.2rem; }
+  .tag {
+    background: var(--cream); border-radius: 2px; padding: .2rem .6rem;
+    font-size: .72rem; color: var(--muted); font-weight: 500;
+  }
+  .worker-available {
+    display: inline-flex; align-items: center; gap: .4rem;
+    font-size: .75rem; color: #2a7a4b; font-weight: 500;
+  }
+  .worker-available::before {
+    content: ''; width: 7px; height: 7px; border-radius: 50%;
+    background: #2a7a4b; display: inline-block;
+  }
+
+  /* ── TESTIMONIAL STRIP ── */
+  .testimonials { background: var(--gold); color: var(--ink); }
+  .testimonials .section-label { color: var(--ink); opacity: .6; }
+  .testimonials .section-title { color: var(--ink); }
+  .testi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem; margin-top: 3rem; }
+  .testi-card {
+    background: rgba(0,0,0,.06); border-radius: 4px; padding: 2rem;
+  }
+  .testi-quote { font-size: 1rem; line-height: 1.7; margin-bottom: 1.2rem; }
+  .testi-author { font-family: 'Syne', sans-serif; font-weight: 700; font-size: .9rem; }
+  .testi-company { font-size: .8rem; opacity: .65; }
+
+  /* ── CTA ── */
+  .cta-section {
+    background: var(--ink); color: var(--white);
+    text-align: center; padding: 8rem 4%;
+  }
+  .cta-section .section-title { color: var(--white); max-width: 18ch; margin: 0 auto 1rem; }
+  .cta-section .section-sub { color: #999; margin: 0 auto 2.5rem; }
+  .cta-group { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; }
+  .contact-bar {
+    display: flex; justify-content: center; gap: 2rem; margin-top: 3rem;
+    flex-wrap: wrap;
+  }
+  .contact-item { color: #777; font-size: .9rem; }
+  .contact-item a { color: var(--gold); text-decoration: none; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: #0a0a0a; color: #555; text-align: center;
+    padding: 2rem 4%; font-size: .8rem;
+  }
+  footer span { color: var(--gold); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 640px) {
+    .nav-links { display: none; }
+    .hero-stats { gap: 1.5rem; }
+    section { padding: 4rem 5%; }
+  }
+
+  /* ── SCROLL REVEAL ── */
+  .reveal { opacity: 0; transform: translateY(28px); transition: opacity .6s ease, transform .6s ease; }
+  .reveal.visible { opacity: 1; transform: none; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">Skill<span>Bridge</span></div>
+  <ul class="nav-links">
+    <li><a href="#workers">Our Workers</a></li>
+    <li><a href="#how">How It Works</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Hire Now</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <p class="hero-eyebrow reveal">Verified · Local · Ready to Work</p>
+  <h1 class="reveal">Skilled Workers, <em>Ready</em> for Your Job.</h1>
+  <p class="hero-sub reveal">We connect you with trusted, pre-vetted professionals in your area. No job boards. No guesswork. Just dependable people ready to work.</p>
+  <div class="hero-actions reveal">
+    <a href="#workers" class="btn-primary">Browse Workers</a>
+    <a href="#contact" class="btn-ghost">Post a Job</a>
+  </div>
+  <div class="hero-stats reveal">
+    <div>
+      <div class="stat-num">50+</div>
+      <div class="stat-label">Active Workers</div>
+    </div>
+    <div>
+      <div class="stat-num">200+</div>
+      <div class="stat-label">Jobs Completed</div>
+    </div>
+    <div>
+      <div class="stat-num">10+</div>
+      <div class="stat-label">Skill Categories</div>
+    </div>
+    <div>
+      <div class="stat-num">48h</div>
+      <div class="stat-label">Avg. Placement Time</div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how" id="how">
+  <p class="section-label reveal">Simple Process</p>
+  <h2 class="section-title reveal">How It Works</h2>
+  <p class="section-sub reveal">Getting help for your business takes three easy steps. We handle the rest.</p>
+  <div class="steps">
+    <div class="step reveal">
+      <div class="step-num">01</div>
+      <h3>Tell Us What You Need</h3>
+      <p>Contact us via WhatsApp or email with your job requirements, location, and timeline.</p>
+    </div>
+    <div class="step reveal">
+      <div class="step-num">02</div>
+      <h3>We Match You</h3>
+      <p>We find the right worker from our roster — skilled, vetted, and available in your area.</p>
+    </div>
+    <div class="step reveal">
+      <div class="step-num">03</div>
+      <h3>Work Gets Done</h3>
+      <p>Your worker shows up, gets the job done professionally. We follow up to make sure you're satisfied.</p>
+    </div>
+    <div class="step reveal">
+      <div class="step-num">04</div>
+      <h3>Refer &amp; Grow</h3>
+      <p>Happy clients share us with others. That's how we grow — through trust, not ads.</p>
+    </div>
+  </div>
+</section>
+
+<!-- WORKERS -->
+<section id="workers">
+  <div class="workers-header">
+    <div>
+      <p class="section-label">Our Talent</p>
+      <h2 class="section-title">Meet Our Workers</h2>
+    </div>
+    <div class="filter-row">
+      <button class="filter-btn active" onclick="filterWorkers('all', this)">All</button>
+      <button class="filter-btn" onclick="filterWorkers('cleaning', this)">Cleaning</button>
+      <button class="filter-btn" onclick="filterWorkers('construction', this)">Construction</button>
+      <button class="filter-btn" onclick="filterWorkers('security', this)">Security</button>
+      <button class="filter-btn" onclick="filterWorkers('driving', this)">Driving</button>
+    </div>
+  </div>
+  <div class="workers-grid" id="workers-grid">
+    <!-- Cards injected by JS -->
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials">
+  <p class="section-label reveal">What Clients Say</p>
+  <h2 class="section-title reveal">Trusted by Local Businesses</h2>
+  <div class="testi-grid">
+    <div class="testi-card reveal">
+      <p class="testi-quote">"I posted a job on Monday and had a reliable cleaner at my office by Wednesday. Absolute game changer for my business."</p>
+      <div class="testi-author">Amara O.</div>
+      <div class="testi-company">Office Manager, Lagos</div>
+    </div>
+    <div class="testi-card reveal">
+      <p class="testi-quote">"All three workers they sent us were punctual, professional, and hardworking. I refer them to everyone I know."</p>
+      <div class="testi-author">Chidi N.</div>
+      <div class="testi-company">Construction Contractor, Abuja</div>
+    </div>
+    <div class="testi-card reveal">
+      <p class="testi-quote">"Finally a platform I can trust. They pre-screen everyone so I don't have to waste time interviewing strangers."</p>
+      <div class="testi-author">Fatima B.</div>
+      <div class="testi-company">Hotel Owner, Kano</div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA / CONTACT -->
+<section class="cta-section" id="contact">
+  <p class="section-label reveal" style="color:var(--gold)">Get Started Today</p>
+  <h2 class="section-title reveal">Need a Worker? Let's Talk.</h2>
+  <p class="section-sub reveal">Drop us a message and we'll match you with the right person within 24 hours.</p>
+  <div class="cta-group reveal">
+    <a href="https://wa.me/1234567890?text=Hi%2C%20I%20need%20a%20worker%20for..." class="btn-primary">💬 WhatsApp Us</a>
+    <a href="mailto:hello@skillbridge.com" class="btn-ghost" style="border-color:#333; color:#ccc;">✉️ Send Email</a>
+  </div>
+  <div class="contact-bar reveal">
+    <span class="contact-item">📞 <a href="tel:+1234567890">+1 234 567 890</a></span>
+    <span class="contact-item">📍 Serving Lagos, Abuja &amp; surrounding areas</span>
+    <span class="contact-item">⏰ Mon–Sat, 8am–8pm</span>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2026 <span>SkillBridge Agency</span>. All rights reserved. Built with trust.</p>
+</footer>
+
+<script>
+  // ── WORKER DATA ──
+  const workers = [
+    { name: "James A.",    role: "Security Guard",    cat: "security",     location: "Lagos Island",  tags: ["Night Shifts", "CCTV", "Events"],       avail: true  },
+    { name: "Grace O.",    role: "House Cleaner",     cat: "cleaning",     location: "Victoria Island",tags: ["Deep Clean", "Laundry", "Cooking"],      avail: true  },
+    { name: "Emmanuel K.", role: "Site Labourer",     cat: "construction", location: "Lekki",         tags: ["Masonry", "Plumbing", "Roofing"],        avail: false },
+    { name: "Aisha M.",    role: "Office Cleaner",    cat: "cleaning",     location: "Surulere",      tags: ["Daily Clean", "Disinfection", "Floors"],  avail: true  },
+    { name: "Tunde B.",    role: "Driver / Logistics",cat: "driving",      location: "Ikeja",         tags: ["Manual", "Automatic", "Night Trips"],    avail: true  },
+    { name: "Ngozi I.",    role: "Domestic Worker",   cat: "cleaning",     location: "Yaba",          tags: ["Childcare", "Cooking", "Errands"],        avail: true  },
+    { name: "Seun F.",     role: "Guard / Patrol",    cat: "security",     location: "Ajah",          tags: ["Armed", "Unarmed", "Residential"],       avail: false },
+    { name: "Peter C.",    role: "Carpenter / Builder",cat:"construction", location: "Mainland",      tags: ["Wood", "Tiling", "Painting"],             avail: true  },
+  ];
+
+  const initials = n => n.split(' ').map(w => w[0]).join('').toUpperCase();
+
+  function renderCards(list) {
+    const grid = document.getElementById('workers-grid');
+    grid.innerHTML = list.map(w => `
+      <div class="worker-card reveal">
+        <div class="worker-img">${initials(w.name)}</div>
+        <div class="worker-body">
+          <div class="worker-name">${w.name}</div>
+          <div class="worker-role">${w.role}</div>
+          <div class="worker-location">📍 ${w.location}</div>
+          <div class="worker-tags">${w.tags.map(t => `<span class="tag">${t}</span>`).join('')}</div>
+          ${w.avail
+            ? `<span class="worker-available">Available Now</span>`
+            : `<span style="font-size:.75rem;color:#aaa;">Currently Busy</span>`}
+        </div>
+      </div>
+    `).join('');
+    observeReveal();
+  }
+
+  function filterWorkers(cat, btn) {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    renderCards(cat === 'all' ? workers : workers.filter(w => w.cat === cat));
+  }
+
+  renderCards(workers);
+
+  // ── SCROLL REVEAL ──
+  function observeReveal() {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal:not(.visible)').forEach(el => io.observe(el));
+  }
+  observeReveal();
+</script>
+</body>
+</html>
